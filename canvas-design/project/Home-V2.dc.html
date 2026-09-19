@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: 'Public Sans', sans-serif; background: #FAF7F2; color: #14213D; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2 { font-family: 'Archivo', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; }
+    h3 { font-family: 'Archivo', sans-serif; font-weight: 800; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #14213D; outline-offset: 3px; }
+    .on-dark a:focus-visible, .on-dark button:focus-visible { outline-color: #E8871E; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    .pegboard { background-image: radial-gradient(#D8CDB8 1.7px, transparent 1.8px); background-size: 28px 28px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-weight: 800; font-size: 16px; padding: 16px 26px; border: 2px solid #14213D; border-radius: 4px; transition: transform 0.12s ease; }
+    .btn:hover { transform: translate(-2px, -2px); }
+    .btn:active { transform: translate(3px, 3px); }
+    .chip { font-weight: 700; font-size: 14.5px; padding: 10px 18px; border: 2px solid #14213D; border-radius: 999px; min-height: 44px; }
+    .hl { padding: 0 0.14em; background-repeat: no-repeat; background-size: 0% 100%; -webkit-box-decoration-break: clone; box-decoration-break: clone; animation: wipe 0.9s 0.35s cubic-bezier(0.7, 0, 0.2, 1) forwards; }
+    @keyframes wipe { to { background-size: 100% 100%; } }
+    .nav-links { display: flex; gap: 30px; }
+    .hamburger-btn { display: none; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
+    .ind-row { display: flex; flex-wrap: wrap; gap: 14px 34px; }
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .cal-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 64px; align-items: start; }
+    .sys-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .where-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .footer-grid { display: grid; grid-template-columns: 1.3fr 0.8fr 0.8fr 1fr; gap: 40px; }
+    @media (prefers-reduced-motion: reduce) {
+      .hl { animation: none; background-size: 100% 100%; }
+      .btn { transition: none; }
+      html { scroll-behavior: auto; }
+    }
+    @media (max-width: 980px) {
+      .nav-links, .nav-desktop { display: none; }
+      .hamburger-btn { display: flex; }
+      .hero-grid, .cal-grid, .where-grid { grid-template-columns: 1fr; }
+      .cards-grid, .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .sys-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .decor { display: none; }
+    }
+    @media (max-width: 620px) {
+      .wrap { padding: 0 20px; }
+      .cards-grid, .steps-grid, .sys-grid, .footer-grid { grid-template-columns: 1fr; }
+      .wa-label { display: none; }
+    }
+  </style>
+</helmet>
+
+<div style="width: 100%; background: #FAF7F2;">
+
+  <header style="position: sticky; top: 0; z-index: 40; background: #FFFFFF; border-bottom: 2px solid {{navy}};">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 24px;">
+      <a href="#inicio" style="display: flex; align-items: center; gap: 12px;">
+        <span style="display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: {{navy}}; color: {{accent}}; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 24px; border-radius: 4px; box-shadow: 3px 3px 0 {{accent}};">B</span>
+        <span style="display: flex; flex-direction: column; line-height: 1.1;">
+          <span style="font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 19px; color: {{navy}};">Belgrano</span>
+          <span style="font-size: 12px; font-weight: 600; color: #5B6479;">Escuela Superior de Oficios</span>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Principal" style="align-items: center;">
+        <a href="#oficios" style="font-size: 15px; font-weight: 700;">Oficios</a>
+        <a href="#inscripcion" style="font-size: 15px; font-weight: 700;">Inscripción</a>
+        <a href="#calendario" style="font-size: 15px; font-weight: 700;">Calendario</a>
+        <a href="#sistemas" style="font-size: 15px; font-weight: 700;">Alumnos y docentes</a>
+        <a href="#contacto" style="font-size: 15px; font-weight: 700;">Contacto</a>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="#sistemas" class="btn nav-desktop" style="background: #FFFFFF; color: {{navy}}; font-size: 14px; padding: 11px 18px;">Acceder al sistema</a>
+        <a href="#inscripcion" class="btn nav-desktop" style="background: {{accent}}; color: {{navy}}; font-size: 14px; padding: 11px 18px; box-shadow: 3px 3px 0 {{navy}};">Preinscribirme</a>
+        <button class="hamburger-btn" onClick="{{toggleMenu}}" aria-label="Abrir menú" style="align-items: center; justify-content: center; width: 46px; height: 46px; border: 2px solid {{navy}}; border-radius: 4px; background: #FFFFFF;">
+          <sc-if value="{{menuClosed}}" hint-placeholder-val="{{true}}">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="#14213D" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </sc-if>
+          <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M5 5l14 14M19 5L5 19" stroke="#14213D" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </sc-if>
+        </button>
+      </div>
+    </div>
+
+    <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
+      <div style="border-top: 2px solid {{navy}}; background: #FFFFFF; padding: 20px 20px 28px; display: flex; flex-direction: column; gap: 6px;">
+        <a href="#oficios" style="font-size: 17px; font-weight: 700; padding: 12px 0;">Oficios</a>
+        <a href="#inscripcion" style="font-size: 17px; font-weight: 700; padding: 12px 0;">Inscripción</a>
+        <a href="#calendario" style="font-size: 17px; font-weight: 700; padding: 12px 0;">Calendario</a>
+        <a href="#sistemas" style="font-size: 17px; font-weight: 700; padding: 12px 0;">Alumnos y docentes</a>
+        <a href="#contacto" style="font-size: 17px; font-weight: 700; padding: 12px 0;">Contacto</a>
+        <a href="#inscripcion" class="btn" style="margin-top: 12px; background: {{accent}}; color: {{navy}}; box-shadow: 4px 4px 0 {{navy}};">Preinscribirme</a>
+      </div>
+    </sc-if>
+  </header>
+
+  <section id="inicio" class="pegboard" style="position: relative; overflow: hidden; padding: 84px 0 96px;">
+    <div class="decor" style="position: absolute; top: 36px; right: 120px; display: flex; gap: 10px;">
+      <span style="width: 20px; height: 20px; border-radius: 999px; background: {{accent}};"></span>
+      <span style="width: 20px; height: 20px; border-radius: 999px; background: {{accent}};"></span>
+      <span style="width: 20px; height: 20px; border-radius: 999px; background: {{accent}};"></span>
+    </div>
+    <div class="decor" style="position: absolute; top: 28px; right: 0; width: 200px; height: 46px; background: #DCE2EF; border: 2px solid {{navy}}; border-right: 0;"></div>
+
+    <div class="wrap hero-grid" style="position: relative;">
+      <div>
+        <span style="display: inline-flex; align-items: center; gap: 8px; background: #FFFFFF; border: 2px solid {{navy}}; border-radius: 999px; padding: 8px 16px; font-size: 14px; font-weight: 700; margin-bottom: 28px;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M12 21s7-6.1 7-11.5A7 7 0 105 9.5C5 14.9 12 21 12 21z" stroke="#14213D" stroke-width="2"/><circle cx="12" cy="9.5" r="2.3" stroke="#14213D" stroke-width="2"/></svg>
+          San Martín, Mendoza
+        </span>
+        <h1 style="font-size: clamp(42px, 5.8vw, 80px); line-height: 1.04; color: {{navy}}; margin-bottom: 28px;">En la Belgrano, el futuro <span class="hl" style="background-image: linear-gradient({{accent}}, {{accent}});">lo construís vos.</span></h1>
+        <p style="font-size: 18px; line-height: 1.6; color: #3B455C; max-width: 52ch; margin-bottom: 36px;">Talleres equipados para que aprendas un oficio con las manos y salgas a trabajar. Formación pública, gratuita y con certificación.</p>
+        <div style="display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 44px;">
+          <a href="#oficios" class="btn" style="background: #FFFFFF; color: {{navy}};">Ver oficios</a>
+          <a href="#inscripcion" class="btn" style="background: {{accent}}; color: {{navy}}; box-shadow: 5px 5px 0 {{navy}};">Preinscribirme</a>
+        </div>
+        <div class="ind-row" aria-label="Indicadores de la escuela">
+          <div><div style="font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 28px; line-height: 1;">+[N°]</div><div style="font-size: 14px; color: #3B455C; margin-top: 4px;">Oficios</div></div>
+          <div><div style="font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 28px; line-height: 1;">[N°]</div><div style="font-size: 14px; color: #3B455C; margin-top: 4px;">Talleres equipados</div></div>
+          <div><div style="font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 28px; line-height: 1;">100%</div><div style="font-size: 14px; color: #3B455C; margin-top: 4px;">Gratuita</div></div>
+          <div><div style="font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 28px; line-height: 1;">[N°]</div><div style="font-size: 14px; color: #3B455C; margin-top: 4px;">Años formando</div></div>
+        </div>
+      </div>
+
+      <div class="on-dark" style="position: relative; overflow: hidden; border: 2px solid {{navy}}; border-radius: 4px; background: linear-gradient(150deg, {{navy}}, #22386B); box-shadow: 9px 9px 0 {{accent}}; padding: 36px;">
+        <div style="position: absolute; right: -70px; top: -70px; width: 240px; height: 240px; border-radius: 999px; background: {{accent}}; filter: blur(56px); opacity: 0.6;"></div>
+        <div style="position: relative;">
+          <span style="display: inline-block; background: #FFFFFF; color: {{navy}}; font-size: 13.5px; font-weight: 800; padding: 7px 13px; border-radius: 4px; margin-bottom: 22px;">Preinscripciones abiertas</span>
+          <h2 style="font-size: clamp(30px, 3.4vw, 44px); line-height: 1.02; color: #FFFFFF; margin-bottom: 16px;">Tu futuro empieza en la Belgrano</h2>
+          <p style="font-size: 16px; line-height: 1.55; color: #DCE2EF; max-width: 40ch; margin-bottom: 26px;">Preinscribite y empezá a construir tu futuro profesional con formación práctica y gratuita.</p>
+          <div style="background: rgba(255,255,255,0.1); border: 1.5px solid rgba(255,255,255,0.35); border-radius: 4px; padding: 14px 16px; margin-bottom: 26px;">
+            <div style="font-size: 13px; font-weight: 600; color: #DCE2EF;">Fecha límite</div>
+            <div style="font-size: 17px; font-weight: 800; color: #FFFFFF; margin-top: 2px;">[DD de mes de 2026], 23:59 h</div>
+          </div>
+          <a href="#inscripcion" class="btn" style="background: {{accent}}; color: {{navy}}; border-color: #FFFFFF; box-shadow: 4px 4px 0 #FFFFFF;">Preinscribirme</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="oficios" style="background: #FFFFFF; padding: 96px 0; border-top: 2px solid {{navy}}; border-bottom: 2px solid {{navy}};">
+    <div class="wrap">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 24px; margin-bottom: 36px;">
+        <div style="max-width: 720px;">
+          <p style="font-size: 15px; font-weight: 700; color: #B85F08; margin-bottom: 14px;">Oferta académica</p>
+          <h2 style="font-size: clamp(30px, 4vw, 48px); line-height: 1.02;">Oficios con salida laboral real</h2>
+        </div>
+        <a href="#inscripcion" class="btn" style="background: #FFFFFF; color: {{navy}}; font-size: 15px; padding: 13px 22px;">Cómo inscribirme</a>
+      </div>
+
+      <div role="group" aria-label="Filtrar oficios por área" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px;">
+        <sc-for list="{{chips}}" as="chip" hint-placeholder-count="7">
+          <span>
+            <sc-if value="{{chip.on}}" hint-placeholder-val="{{false}}">
+              <button class="chip" onClick="{{chip.pick}}" aria-pressed="true" style="background: {{navy}}; color: #FFFFFF;">{{chip.label}}</button>
+            </sc-if>
+            <sc-if value="{{chip.off}}" hint-placeholder-val="{{true}}">
+              <button class="chip" onClick="{{chip.pick}}" aria-pressed="false" style="background: #FFFFFF; color: {{navy}};">{{chip.label}}</button>
+            </sc-if>
+          </span>
+        </sc-for>
+      </div>
+      <p aria-live="polite" style="font-size: 14.5px; color: #5B6479; margin-bottom: 32px;">{{countLabel}}</p>
+
+      <div class="cards-grid">
+        <sc-for list="{{cards}}" as="c" hint-placeholder-count="9">
+          <article style="display: flex; flex-direction: column; background: #FFFFFF; border: 2px solid {{navy}}; border-radius: 4px; box-shadow: 6px 6px 0 {{navy}}; overflow: hidden;">
+            <div class="pegboard" style="position: relative; height: 150px; background-color: #F3E6D0; border-bottom: 2px solid {{navy}}; display: flex; align-items: center; justify-content: center;">
+              <span style="font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 64px; color: {{navy}}; line-height: 1;">{{c.code}}</span>
+              <sc-if value="{{c.isNew}}" hint-placeholder-val="{{false}}">
+                <span style="position: absolute; top: 14px; right: 14px; background: {{accent}}; color: {{navy}}; border: 2px solid {{navy}}; font-size: 12.5px; font-weight: 800; padding: 4px 10px; border-radius: 999px;">Nuevo</span>
+              </sc-if>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; padding: 22px 22px 24px; flex-grow: 1;">
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span style="font-size: 13px; font-weight: 700; background: #DCE2EF; padding: 4px 10px; border-radius: 999px;">{{c.kind}}</span>
+                <span style="font-size: 13px; font-weight: 700; background: #FBEFDD; padding: 4px 10px; border-radius: 999px;">{{c.area}}</span>
+              </div>
+              <h3 style="font-size: 22px; line-height: 1.12;">{{c.title}}</h3>
+              <p style="font-size: 15px; line-height: 1.55; color: #3B455C; flex-grow: 1;">{{c.text}}</p>
+              <a href="#inscripcion" style="font-size: 15px; font-weight: 800; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; margin-top: 6px;">Ver oficio</a>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="inscripcion" class="on-dark" style="background: {{navy}}; padding: 96px 0;">
+    <div class="wrap">
+      <div style="max-width: 760px; margin-bottom: 52px;">
+        <h2 style="font-size: clamp(30px, 4vw, 48px); line-height: 1.02; color: #FFFFFF; margin-bottom: 16px;">¿Ya sabés qué oficio elegir? Inscribirte es simple</h2>
+        <p style="font-size: 17px; line-height: 1.6; color: #C7CEDE; max-width: 56ch;">Son tres pasos y los hacés desde el celular. Te avisamos por mail cuándo y dónde arrancan las clases.</p>
+      </div>
+      <div class="steps-grid" style="margin-bottom: 52px;">
+        <div style="background: #FFFFFF; color: {{navy}}; border-radius: 4px; box-shadow: 6px 6px 0 {{accent}}; padding: 30px 28px;">
+          <div style="display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; background: {{accent}}; border: 2px solid {{navy}}; border-radius: 4px; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 26px; margin-bottom: 20px;">1</div>
+          <h3 style="font-size: 22px; margin-bottom: 10px;">Elegí tu oficio</h3>
+          <p style="font-size: 15px; line-height: 1.55; color: #3B455C;">Mirá la oferta y elegí el taller que más te interese. Podés filtrar por área.</p>
+        </div>
+        <div style="background: #FFFFFF; color: {{navy}}; border-radius: 4px; box-shadow: 6px 6px 0 {{accent}}; padding: 30px 28px;">
+          <div style="display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; background: {{accent}}; border: 2px solid {{navy}}; border-radius: 4px; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 26px; margin-bottom: 20px;">2</div>
+          <h3 style="font-size: 22px; margin-bottom: 10px;">Completá el formulario</h3>
+          <p style="font-size: 15px; line-height: 1.55; color: #3B455C;">Cargá tus datos en la preinscripción online. Te lleva unos minutos.</p>
+        </div>
+        <div style="background: #FFFFFF; color: {{navy}}; border-radius: 4px; box-shadow: 6px 6px 0 {{accent}}; padding: 30px 28px;">
+          <div style="display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; background: {{accent}}; border: 2px solid {{navy}}; border-radius: 4px; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 26px; margin-bottom: 20px;">3</div>
+          <h3 style="font-size: 22px; margin-bottom: 10px;">Confirmá y empezá a cursar</h3>
+          <p style="font-size: 15px; line-height: 1.55; color: #3B455C;">Confirmamos tu lugar y te avisamos la fecha de inicio de clases.</p>
+        </div>
+      </div>
+      <a href="#contacto" class="btn" style="background: {{accent}}; color: {{navy}}; border-color: #FFFFFF; box-shadow: 5px 5px 0 #FFFFFF;">Preinscribirme</a>
+    </div>
+  </section>
+
+  <section id="calendario" style="background: #FAF7F2; padding: 96px 0;">
+    <div class="wrap cal-grid">
+      <div>
+        <p style="font-size: 15px; font-weight: 700; color: #B85F08; margin-bottom: 14px;">Calendario académico</p>
+        <h2 style="font-size: clamp(30px, 4vw, 48px); line-height: 1.02; margin-bottom: 18px;">Calendario 2026</h2>
+        <p style="font-size: 16.5px; line-height: 1.6; color: #3B455C; max-width: 44ch;">Anotá las fechas clave del año. Si cambia alguna, la actualizamos acá y te avisamos por mail.</p>
+      </div>
+      <div style="border: 2px solid {{navy}}; border-radius: 4px; background: #FFFFFF; box-shadow: 6px 6px 0 {{navy}};">
+        <div style="display: flex; align-items: center; gap: 22px; padding: 20px 24px; border-bottom: 2px solid {{navy}};">
+          <div style="flex-shrink: 0; min-width: 118px; background: {{accent}}; border: 2px solid {{navy}}; border-radius: 4px; padding: 10px 12px; text-align: center; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 17px;">[DD/MM]</div>
+          <div><div style="font-size: 18px; font-weight: 800;">Preinscripción online</div><div style="font-size: 14.5px; color: #5B6479; margin-top: 2px;">Hasta el cierre de la fecha límite.</div></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 22px; padding: 20px 24px; border-bottom: 2px solid {{navy}};">
+          <div style="flex-shrink: 0; min-width: 118px; background: {{navy}}; color: #FFFFFF; border: 2px solid {{navy}}; border-radius: 4px; padding: 10px 12px; text-align: center; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 17px;">[DD/MM]</div>
+          <div><div style="font-size: 18px; font-weight: 800;">Inicio de clases</div><div style="font-size: 14.5px; color: #5B6479; margin-top: 2px;">Primer día en los talleres.</div></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 22px; padding: 20px 24px; border-bottom: 2px solid {{navy}};">
+          <div style="flex-shrink: 0; min-width: 118px; background: {{navy}}; color: #FFFFFF; border: 2px solid {{navy}}; border-radius: 4px; padding: 10px 12px; text-align: center; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 17px;">[DD/MM]</div>
+          <div><div style="font-size: 18px; font-weight: 800;">Receso de invierno</div><div style="font-size: 14.5px; color: #5B6479; margin-top: 2px;">Sin actividad en los talleres.</div></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 22px; padding: 20px 24px; border-bottom: 2px solid {{navy}};">
+          <div style="flex-shrink: 0; min-width: 118px; background: {{navy}}; color: #FFFFFF; border: 2px solid {{navy}}; border-radius: 4px; padding: 10px 12px; text-align: center; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 17px;">[DD/MM]</div>
+          <div><div style="font-size: 18px; font-weight: 800;">Cierre de cursada</div><div style="font-size: 14.5px; color: #5B6479; margin-top: 2px;">Evaluaciones finales y muestra de proyectos.</div></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 22px; padding: 20px 24px;">
+          <div style="flex-shrink: 0; min-width: 118px; background: {{accent}}; border: 2px solid {{navy}}; border-radius: 4px; padding: 10px 12px; text-align: center; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 17px;">[DD/MM]</div>
+          <div><div style="font-size: 18px; font-weight: 800;">Entrega de certificados</div><div style="font-size: 14.5px; color: #5B6479; margin-top: 2px;">Acto de egreso de la cohorte.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sistemas" style="background: #FFFFFF; padding: 96px 0; border-top: 2px solid {{navy}}; border-bottom: 2px solid {{navy}};">
+    <div class="wrap">
+      <div style="max-width: 720px; margin-bottom: 48px;">
+        <p style="font-size: 15px; font-weight: 700; color: #B85F08; margin-bottom: 14px;">Sistemas de la escuela</p>
+        <h2 style="font-size: clamp(30px, 4vw, 48px); line-height: 1.02;">Tu vida en la escuela, en un solo lugar</h2>
+      </div>
+      <div class="sys-grid">
+        <div style="display: flex; flex-direction: column; gap: 12px; border: 2px solid {{navy}}; border-radius: 4px; padding: 26px 24px; background: #FAF7F2;">
+          <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: {{accent}}; border: 2px solid {{navy}}; border-radius: 4px;"><svg viewBox="0 0 24 24" width="24" height="24" fill="none"><circle cx="12" cy="8" r="4" stroke="#14213D" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="#14213D" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3 style="font-size: 19px;">Autogestión de alumnos</h3>
+          <p style="font-size: 14.5px; line-height: 1.5; color: #3B455C; flex-grow: 1;">Consultá tus cursadas, notas y asistencia.</p>
+          <a href="#sistemas" style="font-size: 15px; font-weight: 800; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;">Ingresar</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; border: 2px solid {{navy}}; border-radius: 4px; padding: 26px 24px; background: #FAF7F2;">
+          <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: {{accent}}; border: 2px solid {{navy}}; border-radius: 4px;"><svg viewBox="0 0 24 24" width="24" height="24" fill="none"><rect x="5" y="4" width="14" height="17" rx="2" stroke="#14213D" stroke-width="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6" stroke="#14213D" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3 style="font-size: 19px;">Autogestión de docentes</h3>
+          <p style="font-size: 14.5px; line-height: 1.5; color: #3B455C; flex-grow: 1;">Cargá asistencia y calificaciones de tus talleres.</p>
+          <a href="#sistemas" style="font-size: 15px; font-weight: 800; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;">Ingresar</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; border: 2px solid {{navy}}; border-radius: 4px; padding: 26px 24px; background: #FAF7F2;">
+          <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: {{accent}}; border: 2px solid {{navy}}; border-radius: 4px;"><svg viewBox="0 0 24 24" width="24" height="24" fill="none"><rect x="3.5" y="8" width="17" height="11.5" rx="2" stroke="#14213D" stroke-width="2"/><path d="M8.5 8V6.2A2.2 2.2 0 0110.7 4h2.6a2.2 2.2 0 012.2 2.2V8" stroke="#14213D" stroke-width="2"/></svg></div>
+          <h3 style="font-size: 19px;">Bolsa de trabajo</h3>
+          <p style="font-size: 14.5px; line-height: 1.5; color: #3B455C; flex-grow: 1;">Ofertas de empresas y talleres de la zona para egresados.</p>
+          <a href="#sistemas" style="font-size: 15px; font-weight: 800; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;">Ver ofertas</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; border: 2px solid {{navy}}; border-radius: 4px; padding: 26px 24px; background: #FAF7F2;">
+          <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: {{accent}}; border: 2px solid {{navy}}; border-radius: 4px;"><svg viewBox="0 0 24 24" width="24" height="24" fill="none"><path d="M4 5h6a2 2 0 012 2v12a2 2 0 00-2-2H4V5zM20 5h-6a2 2 0 00-2 2v12a2 2 0 012-2h6V5z" stroke="#14213D" stroke-width="2" stroke-linejoin="round"/></svg></div>
+          <h3 style="font-size: 19px;">Aula virtual</h3>
+          <p style="font-size: 14.5px; line-height: 1.5; color: #3B455C; flex-grow: 1;">Material de clase y consultas con tus docentes.</p>
+          <a href="#sistemas" style="font-size: 15px; font-weight: 800; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;">Ingresar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" style="background: #FAF7F2; padding: 96px 0;">
+    <div class="wrap where-grid">
+      <div>
+        <p style="font-size: 15px; font-weight: 700; color: #B85F08; margin-bottom: 14px;">Dónde estamos</p>
+        <h2 style="font-size: clamp(30px, 4vw, 48px); line-height: 1.02; margin-bottom: 26px;">Vení a conocer los talleres</h2>
+        <div style="display: flex; flex-direction: column; gap: 18px; margin-bottom: 30px;">
+          <div style="display: flex; gap: 14px;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" style="flex-shrink: 0; margin-top: 2px;"><path d="M12 21s7-6.1 7-11.5A7 7 0 105 9.5C5 14.9 12 21 12 21z" stroke="#14213D" stroke-width="2"/><circle cx="12" cy="9.5" r="2.3" stroke="#14213D" stroke-width="2"/></svg><div><div style="font-weight: 800;">Dirección</div><div style="font-size: 15.5px; color: #3B455C;">[Calle y número], San Martín, Mendoza</div></div></div>
+          <div style="display: flex; gap: 14px;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="9" stroke="#14213D" stroke-width="2"/><path d="M12 7v5l3.5 2" stroke="#14213D" stroke-width="2" stroke-linecap="round"/></svg><div><div style="font-weight: 800;">Horario de atención</div><div style="font-size: 15.5px; color: #3B455C;">[Días y horarios]</div></div></div>
+          <div style="display: flex; gap: 14px;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" style="flex-shrink: 0; margin-top: 2px;"><rect x="3.5" y="5.5" width="17" height="13" rx="2" stroke="#14213D" stroke-width="2"/><path d="M4 7l8 6 8-6" stroke="#14213D" stroke-width="2"/></svg><div><div style="font-weight: 800;">Correo</div><div style="font-size: 15.5px; color: #3B455C;">[correo@escuela.edu.ar]</div></div></div>
+        </div>
+        <a href="#inscripcion" class="btn" style="background: {{accent}}; color: {{navy}}; box-shadow: 5px 5px 0 {{navy}};">Preinscribirme</a>
+      </div>
+      <div class="pegboard" style="position: relative; height: 380px; border: 2px solid {{navy}}; border-radius: 4px; background-color: #F3E6D0; box-shadow: 8px 8px 0 {{navy}}; display: flex; align-items: center; justify-content: center;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; background: #FFFFFF; border: 2px solid {{navy}}; border-radius: 4px; padding: 20px 24px; text-align: center;">
+          <svg viewBox="0 0 24 24" width="34" height="34" fill="none"><path d="M12 21s7-6.1 7-11.5A7 7 0 105 9.5C5 14.9 12 21 12 21z" fill="{{accent}}" stroke="#14213D" stroke-width="2"/><circle cx="12" cy="9.5" r="2.3" fill="#FFFFFF" stroke="#14213D" stroke-width="2"/></svg>
+          <span style="font-size: 14.5px; font-weight: 700;">[Mapa: Escuela Belgrano, San Martín]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: {{accent}}; border-top: 2px solid {{navy}}; border-bottom: 2px solid {{navy}}; padding: 72px 0;">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 32px;">
+      <h2 style="font-size: clamp(28px, 3.8vw, 46px); line-height: 1.04; color: {{navy}}; max-width: 18ch;">Una escuela pública, gratuita y abierta a toda la comunidad.</h2>
+      <a href="#inscripcion" class="btn" style="background: {{navy}}; color: #FFFFFF; box-shadow: 5px 5px 0 #FFFFFF;">Preinscribirme</a>
+    </div>
+  </section>
+
+  <footer class="on-dark" style="background: #0F1830; padding: 72px 0 28px;">
+    <div class="wrap footer-grid" style="margin-bottom: 48px;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 18px;">
+          <span style="display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: {{accent}}; color: {{navy}}; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 24px; border-radius: 4px;">B</span>
+          <span style="display: flex; flex-direction: column; line-height: 1.1;"><span style="font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 19px; color: #FFFFFF;">Belgrano</span><span style="font-size: 12px; font-weight: 600; color: #A9B1C7;">Escuela Superior de Oficios</span></span>
+        </div>
+        <p style="font-size: 14.5px; line-height: 1.6; color: #A9B1C7; max-width: 34ch;">Formación pública en oficios para jóvenes y adultos de San Martín y del este mendocino.</p>
+      </div>
+      <div>
+        <div style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 16px; color: #FFFFFF; margin-bottom: 18px;">Escuela</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a href="#oficios" style="font-size: 14.5px; color: #C7CEDE;">Oficios</a>
+          <a href="#inscripcion" style="font-size: 14.5px; color: #C7CEDE;">Inscripción</a>
+          <a href="#calendario" style="font-size: 14.5px; color: #C7CEDE;">Calendario</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 16px; color: #FFFFFF; margin-bottom: 18px;">Comunidad</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a href="#sistemas" style="font-size: 14.5px; color: #C7CEDE;">Alumnos</a>
+          <a href="#sistemas" style="font-size: 14.5px; color: #C7CEDE;">Docentes</a>
+          <a href="#sistemas" style="font-size: 14.5px; color: #C7CEDE;">Bolsa de trabajo</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 16px; color: #FFFFFF; margin-bottom: 18px;">Contacto</div>
+        <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14.5px; color: #C7CEDE; line-height: 1.5;">
+          <span>[Calle y número], San Martín</span>
+          <span>[Teléfono de contacto]</span>
+          <span>[correo@escuela.edu.ar]</span>
+        </div>
+      </div>
+    </div>
+    <div class="wrap" style="border-top: 1px solid #2B3556; padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+      <span style="font-size: 13.5px; color: #8892AC;">© 2026 Escuela Superior de Oficios Manuel Belgrano</span>
+      <span style="font-size: 13.5px; color: #8892AC;">San Martín, Provincia de Mendoza</span>
+    </div>
+  </footer>
+
+  <a href="#contacto" class="btn on-dark" style="position: fixed; right: 20px; bottom: 20px; z-index: 50; background: {{navy}}; color: #FFFFFF; border-color: #FFFFFF; box-shadow: 4px 4px 0 {{accent}}; padding: 13px 20px;">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M4 5.5A2.5 2.5 0 016.5 3h11A2.5 2.5 0 0120 5.5v8a2.5 2.5 0 01-2.5 2.5H10l-4 4v-4H6.5A2.5 2.5 0 014 13.5v-8z" stroke="{{accent}}" stroke-width="2" stroke-linejoin="round"/></svg>
+    <span class="wa-label">Escribinos por WhatsApp</span>
+  </a>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#E8871E","options":["#E8871E","#C96A0A","#F2A93B","#D9541E"]},"navy":{"editor":"color","default":"#14213D"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false, area: 'Todos' };
+  }
+  renderVals() {
+    const areas = ['Todos', 'Construcción', 'Energía', 'Metalmecánica', 'Indumentaria y estética', 'Alimentación', 'Informática'];
+    const all = [
+      { code: 'EL', title: 'Técnico electricista', area: 'Energía', kind: 'Tecnicatura · 2 años', isNew: false, text: 'Instalaciones eléctricas seguras, normativa vigente y mantenimiento residencial e industrial.' },
+      { code: 'SO', title: 'Técnico soldador', area: 'Metalmecánica', kind: 'Tecnicatura · 2 años', isNew: false, text: 'Soldadura, forja y estructuras metálicas para obra y diseño.' },
+      { code: 'GA', title: 'Instalador gasista', area: 'Construcción', kind: 'Curso anual', isNew: false, text: 'Instalación y reparación de artefactos y redes de gas, con orientación a la matriculación.' },
+      { code: 'SA', title: 'Instalador sanitarista', area: 'Construcción', kind: 'Curso anual', isNew: false, text: 'Redes de agua, desagües y sanitarios, del plano a la instalación terminada.' },
+      { code: 'CA', title: 'Carpintería y ebanistería', area: 'Construcción', kind: 'Curso anual', isNew: false, text: 'Muebles y estructuras en madera, con prácticas en taller desde el primer día.' },
+      { code: 'CO', title: 'Diseño y confección de indumentaria', area: 'Indumentaria y estética', kind: 'Curso anual', isNew: false, text: 'Moldería, confección y armado de prendas, del boceto a la prenda terminada.' },
+      { code: 'PE', title: 'Peluquería y estética integral', area: 'Indumentaria y estética', kind: 'Curso anual', isNew: true, text: 'Cortes, coloración y tratamientos, con prácticas sobre modelos reales.' },
+      { code: 'PA', title: 'Panadería y pastelería', area: 'Alimentación', kind: 'Curso anual', isNew: false, text: 'Panificados y pastelería para consumo y venta, con normas de manipulación de alimentos.' },
+      { code: 'RI', title: 'Redes e informática', area: 'Informática', kind: 'Curso anual', isNew: true, text: 'Armado y reparación de PC, redes domiciliarias y soporte técnico básico.' }
+    ];
+    const cur = this.state.area;
+    const cards = cur === 'Todos' ? all : all.filter((c) => c.area === cur);
+    const chips = areas.map((a) => ({
+      label: a,
+      on: a === cur,
+      off: a !== cur,
+      pick: () => this.setState({ area: a })
+    }));
+    const n = cards.length;
+    return {
+      accent: this.props.accent ?? '#E8871E',
+      navy: this.props.navy ?? '#14213D',
+      menuOpen: this.state.menuOpen,
+      menuClosed: !this.state.menuOpen,
+      toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen }),
+      chips,
+      cards,
+      countLabel: n === 1 ? 'Mostrando 1 oficio' : 'Mostrando ' + n + ' oficios'
+    };
+  }
+}
+</script>
+</body>
+</html>
