@@ -7,6 +7,13 @@
   var SUPERIOR = 'Formación profesional superior';
 
   // area: posición en "areas". cupos (opcional): { total: 30, ocupados: 12 }
+  // Campos opcionales para la ficha de cada curso (si faltan, la ficha no muestra esa sección):
+  //   resumen: 'Una frase que cuenta qué vas a poder hacer.'
+  //   detalle: ['Párrafo sobre la formación.', 'Otro párrafo.']   (texto o lista de párrafos)
+  //   aplicacion: 'Dónde podés trabajar al egresar.'              (texto o lista de párrafos)
+  //   requisitos: ['Requisito 1', 'Requisito 2']
+  //   horarios: 'Martes y jueves de 18 a 21 h'
+  //   duracion: '4 meses'    (reemplaza la duración deducida del tipo de curso)
   window.OFICIOS = {
     areas: [
       'Construcción y carpintería',

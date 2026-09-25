@@ -415,6 +415,53 @@
     <span class="wa-label">Consultas por WhatsApp</span>
   </a>
 
+<dialog id="detalle" aria-labelledby="det-titulo">
+  <div class="det-wrap">
+    <button type="button" id="det-cerrar" class="det-close" aria-label="Cerrar la ficha del curso">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="#08233F" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </button>
+    <span id="det-area" class="det-area"></span>
+    <h2 id="det-titulo"></h2>
+    <p id="det-resumen" hidden></p>
+    <div class="det-grid">
+      <div class="det-main">
+        <section id="det-sobre">
+          <h3>Sobre este curso</h3>
+          <p id="det-base"></p>
+          <p id="det-nota" hidden>Los contenidos, horarios y requisitos los confirma el equipo de la escuela. Consultalos por WhatsApp antes de preinscribirte.</p>
+        </section>
+        <section id="det-detalle" hidden>
+          <h3>Detalle de la formación</h3>
+          <div id="det-detalle-txt"></div>
+        </section>
+        <section id="det-aplicacion" hidden>
+          <h3>Aplicación profesional</h3>
+          <div id="det-aplicacion-txt"></div>
+        </section>
+        <section id="det-requisitos" hidden>
+          <h3>Requisitos</h3>
+          <ul id="det-requisitos-lista"></ul>
+        </section>
+        <section id="det-relacionados" hidden>
+          <h3>Otros cursos de esta área</h3>
+          <div id="det-rel-lista"></div>
+        </section>
+      </div>
+      <aside class="det-side" aria-label="Datos clave">
+        <h3>Datos clave</h3>
+        <dl id="det-datos" class="det-datos"></dl>
+        <div id="det-estado"></div>
+        <div id="det-acciones" class="det-acciones"></div>
+        <div class="det-ayuda">
+          <strong>¿Necesitás ayuda?</strong>
+          <p>Escribinos por WhatsApp. Es solo para consultas: la preinscripción se hace en el formulario.</p>
+          <a id="det-wa" class="btn" href="#" style="background: #FFFFFF; color: var(--navy); font-size: 15px; padding: 12px 18px;">Consultar por este curso</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</dialog>
+
 <noscript>
   <div style="padding: 24px; text-align: center; font-family: Inter, sans-serif;">Este sitio necesita JavaScript para mostrar la oferta de oficios. Escribinos a escuelasuperiordeoficios@gmail.com o al 2634-210261.</div>
 </noscript>

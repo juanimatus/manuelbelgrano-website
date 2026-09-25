@@ -5,6 +5,7 @@
   var DATA = window.OFICIOS;
   var AREAS = DATA.areas;
   var PER_PAGE = 9;
+  var WA = 'https://wa.me/5492634210261';
   var DEMO_PROXIMAMENTE = ['Formación profesional de guardavidas', 'Robótica (inicial)'];
   var SIN_CUPOS = CFG.modoDemo && /[?&]sincupos=1/.test(window.location.search);
 
@@ -17,6 +18,7 @@
     });
   }
   function norm(t) { return t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+  function slugify(t) { return norm(t).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
 
   var SKIP = /^(de|del|la|el|en|y|para|a)$/i;
   function codeOf(t) {
@@ -39,6 +41,8 @@
     var known = left !== null;
     var c = {
       id: 'o' + i,
+      item: it,
+      slug: slugify(it.titulo),
       title: it.titulo,
       kind: it.tipo,
       inst: it.dicta,
@@ -63,6 +67,7 @@
   });
 
   function byId(id) { return all.filter(function (c) { return c.id === id; })[0]; }
+  function bySlug(slug) { return all.filter(function (c) { return c.slug === slug; })[0]; }
 
   var elChips = $('chips');
   var elCards = $('cards');
@@ -101,11 +106,12 @@
       '<span style="font-size: 13px; font-weight: 700; background: #E3F2FB; padding: 4px 10px; border-radius: 999px;">' + esc(c.kind) + '</span>' +
       '</div>' +
       '<div style="display: flex; flex-direction: column; gap: 8px; padding: 16px 20px 22px; flex-grow: 1;">' +
-      '<h3 style="font-size: 19px; line-height: 1.15; letter-spacing: -0.025em;">' + esc(c.title) + '</h3>' +
+      '<h3 style="font-size: 19px; line-height: 1.15; letter-spacing: -0.025em;"><a href="#oficio/' + c.slug + '">' + esc(c.title) + '</a></h3>' +
       '<span style="font-size: 14px; font-weight: 700; color: var(--accent-dark);">' + esc(c.areaName) + '</span>' +
       '<div style="font-size: 13.5px; line-height: 1.4; color: #5B6B7B;"><span style="font-weight: 700; color: #4A5A6A;">Dicta:</span> <span>' + esc(c.inst) + '</span></div>' +
       '<div style="flex-grow: 1;"></div>' +
-      '<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 8px;">' + statusHTML(c) + actionHTML(c) + '</div>' +
+      '<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 8px;">' + statusHTML(c) + actionHTML(c) +
+      '<a href="#oficio/' + c.slug + '" style="font-size: 14.5px; font-weight: 800; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;">Ver detalle</a></div>' +
       '</div></article>';
   }
 
@@ -230,14 +236,16 @@
     state.showAll = false;
     renderCatalog();
   });
-  elCards.addEventListener('click', function (e) {
-    var a = e.target.closest('[data-elegir]');
-    if (!a) return;
-    state.oficioId = a.getAttribute('data-elegir');
+  function elegir(id) {
+    state.oficioId = id;
     $('form-ok').hidden = true;
     $('form-preinscripcion').hidden = false;
     $('form-error').hidden = true;
     renderChosen();
+  }
+  elCards.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-elegir]');
+    if (a) elegir(a.getAttribute('data-elegir'));
   });
   elMoreBtn.addEventListener('click', function () { state.showAll = !state.showAll; renderCatalog(); });
   $('limpiar-filtros').addEventListener('click', function () {
@@ -256,8 +264,96 @@
     renderChosen();
   });
 
+  var dlg = $('detalle');
+
+  function paragraphs(v) {
+    var list = Array.isArray(v) ? v : (v ? [v] : []);
+    return list.map(function (t) { return '<p>' + esc(t) + '</p>'; }).join('');
+  }
+
+  function duracionDe(c) {
+    if (c.item.duracion) return c.item.duracion;
+    if (c.kind === 'Curso anual') return '1 año';
+    if (c.kind === 'Curso semestral') return '6 meses';
+    var m = /^Tecnicatura de (\d+ años?)$/.exec(c.kind);
+    return m ? m[1] : '';
+  }
+
+  function sobreEste(c) {
+    var art = /^(Curso|Taller)/.test(c.kind) ? 'un' : 'una';
+    return 'Es ' + art + ' ' + c.kind.charAt(0).toLowerCase() + c.kind.slice(1) + ' del área ' + c.areaName.toLowerCase() +
+      ' que dicta ' + c.inst + '. La formación es gratuita y presencial.';
+  }
+
+  function openDetail(c) {
+    var it = c.item;
+    var hasDetalle = !!it.detalle;
+    var hasAplicacion = !!it.aplicacion;
+    var hasReq = !!(it.requisitos && it.requisitos.length);
+
+    $('det-area').textContent = c.areaName;
+    $('det-titulo').textContent = c.title;
+    $('det-resumen').textContent = it.resumen || '';
+    $('det-resumen').hidden = !it.resumen;
+    $('det-base').textContent = sobreEste(c);
+    $('det-nota').hidden = hasDetalle || hasAplicacion;
+    $('det-detalle').hidden = !hasDetalle;
+    $('det-detalle-txt').innerHTML = paragraphs(it.detalle);
+    $('det-aplicacion').hidden = !hasAplicacion;
+    $('det-aplicacion-txt').innerHTML = paragraphs(it.aplicacion);
+    $('det-requisitos').hidden = !hasReq;
+    $('det-requisitos-lista').innerHTML = hasReq ? it.requisitos.map(function (r) { return '<li>' + esc(r) + '</li>'; }).join('') : '';
+
+    var rows = [['Dicta', c.inst], ['Tipo', c.kind], ['Área', c.areaName]];
+    var dur = duracionDe(c);
+    if (dur) rows.push(['Duración', dur]);
+    if (it.horarios) rows.push(['Horarios', it.horarios]);
+    rows.push(['Modalidad', 'Presencial'], ['Costo', 'Gratuito']);
+    $('det-datos').innerHTML = rows.map(function (r) { return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('');
+    $('det-estado').innerHTML = statusHTML(c);
+    $('det-acciones').innerHTML = actionHTML(c);
+    $('det-wa').href = WA + '?text=' + encodeURIComponent('Hola! Tengo una consulta sobre el curso "' + c.title + '" de la Escuela Superior de Oficios Manuel Belgrano.');
+
+    var rel = all.filter(function (x) { return x.areaName === c.areaName && x.id !== c.id; }).slice(0, 4);
+    $('det-relacionados').hidden = rel.length === 0;
+    $('det-rel-lista').innerHTML = rel.map(function (x) { return '<a class="det-rel" href="#oficio/' + x.slug + '">' + esc(x.title) + '</a>'; }).join('');
+
+    if (!dlg.open) {
+      dlg.showModal();
+      document.body.classList.add('det-abierto');
+    }
+    dlg.querySelector('.det-wrap').scrollTop = 0;
+  }
+
+  function fromHash() {
+    var m = /^#oficio\/([a-z0-9-]+)$/.exec(window.location.hash);
+    var c = m ? bySlug(m[1]) : null;
+    if (c) openDetail(c);
+    else if (dlg.open) cerrarDetalle();
+  }
+
+  function cerrarDetalle() {
+    if (dlg.open) dlg.close();
+    document.body.classList.remove('det-abierto');
+    if (/^#oficio\//.test(window.location.hash)) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }
+
+  dlg.addEventListener('close', function () { if (!dlg.open) cerrarDetalle(); });
+  dlg.addEventListener('click', function (e) {
+    if (e.target === dlg || e.target.closest('#det-cerrar')) { cerrarDetalle(); return; }
+    var a = e.target.closest('[data-elegir]');
+    if (a) {
+      elegir(a.getAttribute('data-elegir'));
+      cerrarDetalle();
+    }
+  });
+  window.addEventListener('hashchange', fromHash);
+
   $('demo-banner').hidden = !CFG.modoDemo;
   renderCatalog();
   renderPromo();
   renderChosen();
+  fromHash();
 })();

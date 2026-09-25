@@ -9,6 +9,33 @@
 .skip:focus { left: 8px; }
 .demo-banner { background: var(--navy); color: #FFFFFF; text-align: center; font-size: 13.5px; line-height: 1.4; padding: 9px 20px; }
 .demo-banner strong { font-weight: 800; }
+
+body.det-abierto { overflow: hidden; }
+#detalle { border: 2px solid var(--navy); border-radius: 4px; padding: 0; width: min(1020px, calc(100vw - 32px)); max-height: calc(100vh - 32px); background: #FFFFFF; color: var(--navy); box-shadow: 10px 10px 0 var(--navy); overflow: hidden; }
+#detalle::backdrop { background: rgba(8, 35, 63, 0.62); }
+.det-wrap { position: relative; padding: 40px; max-height: calc(100vh - 36px); overflow: auto; }
+.det-close { position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: #FFFFFF; border: 2px solid var(--navy); border-radius: 4px; }
+.det-area { display: inline-block; font-size: 14px; font-weight: 700; color: var(--accent-dark); margin-bottom: 10px; }
+#det-titulo { font-size: clamp(30px, 4.4vw, 52px); line-height: 0.98; max-width: 22ch; margin-bottom: 14px; padding-right: 56px; }
+#det-resumen { font-size: 18px; line-height: 1.5; color: #4A5A6A; max-width: 56ch; }
+.det-grid { display: grid; grid-template-columns: 1.5fr 0.9fr; gap: 40px; margin-top: 28px; align-items: start; }
+.det-main section { margin-bottom: 28px; }
+.det-main h3, .det-side h3 { font-size: 15px; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 10px; }
+.det-main p { font-size: 16px; line-height: 1.65; color: #4A5A6A; max-width: 62ch; margin-bottom: 12px; }
+.det-main ul { margin: 0; padding-left: 20px; color: #4A5A6A; line-height: 1.65; }
+.det-rel { display: block; padding: 12px 0; border-top: 1px solid #D8E3ED; font-weight: 700; font-size: 15.5px; }
+.det-side { border: 2px solid var(--navy); border-radius: 4px; background: #F3F8FC; padding: 22px; }
+.det-datos { margin: 0 0 16px; }
+.det-datos dt { font-size: 12.5px; font-weight: 700; color: #5B6B7B; margin-top: 12px; }
+.det-datos dd { margin: 2px 0 0; font-size: 15.5px; font-weight: 700; }
+.det-acciones { display: flex; flex-direction: column; align-items: stretch; gap: 12px; margin-top: 14px; }
+.det-ayuda { margin-top: 20px; padding-top: 18px; border-top: 1px solid #C5D5E4; }
+.det-ayuda p { font-size: 14px; line-height: 1.5; color: #4A5A6A; margin: 6px 0 12px; }
+@media (max-width: 860px) {
+  #detalle { width: calc(100vw - 16px); max-height: calc(100vh - 16px); }
+  .det-wrap { padding: 28px 20px; max-height: calc(100vh - 20px); }
+  .det-grid { grid-template-columns: 1fr; gap: 28px; }
+}
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; font-family: 'Inter', sans-serif; background: #F3F8FC; color: #08233F; }

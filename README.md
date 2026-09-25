@@ -37,7 +37,21 @@ Antes de publicar de forma oficial hay que conectar los datos reales:
 
 Para ver cómo se ve la página cuando no queda ningún cupo, abrir `index.html?sincupos=1` (solo en modo demo).
 
+## Ficha de cada curso
+
+Cada tarjeta tiene "Ver detalle", que abre una ficha inspirada en las carreras de UPrO: datos clave (quién lo dicta, tipo, área, duración, modalidad, costo, cupos), cursos relacionados del área y una consulta directa por WhatsApp. Cada ficha tiene enlace propio, por ejemplo `index.html#oficio/electricidad-domiciliaria`, para compartir en redes.
+
+Hoy la ficha solo muestra datos reales que ya tenemos. Para sumar el detalle de la formación, se completan estos campos opcionales de cada curso en `data/oficios.js`; si un campo falta, esa sección no aparece:
+
+- `resumen`: una frase que cuenta qué vas a poder hacer.
+- `detalle`: qué se aprende y cómo es la formación (texto o lista de párrafos).
+- `aplicacion`: dónde se puede trabajar al egresar.
+- `requisitos`: lista de requisitos.
+- `horarios` y `duracion`: si difieren de lo que se deduce del tipo de curso.
+
 ## Contenido a completar
+
+- Detalle de cada curso (`resumen`, `detalle`, `aplicacion`, `requisitos`, `horarios`): lo tiene que proveer la escuela.
 
 - Fechas del calendario 2026 (hoy dicen "A confirmar").
 - Estadísticas del inicio (+30 oficios, 10 talleres equipados, 2 años formando): confirmar que sean correctas.
