@@ -1,6 +1,6 @@
 # Escuela Superior de Oficios Manuel Belgrano — Sitio institucional
 
-Sitio de una sola página para la Escuela Superior de Oficios Manuel Belgrano (San Martín, Provincia de Buenos Aires): institución, oferta educativa, inscripción, novedades y contacto.
+Sitio de una sola página para la Escuela Superior de Oficios Manuel Belgrano (San Martín, Mendoza): institución, oferta educativa, inscripción, novedades y contacto.
 
 ## Ver el sitio
 

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Escuela Superior de Oficios Manuel Belgrano</title>
-<meta name="description" content="Sitio institucional de la Escuela Superior de Oficios Manuel Belgrano, San Martín, Provincia de Buenos Aires.">
+<meta name="description" content="Sitio institucional de la Escuela Superior de Oficios Manuel Belgrano, San Martín, Mendoza.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -188,7 +188,9 @@
   .contact-list b{display:block;font-size:14px;}
   .contact-list span{color:var(--ink-soft);font-size:14px;}
   .map-card{border:1px solid var(--line);border-radius:20px;background:var(--surface);padding:20px;}
-  .map-card svg{width:100%;height:auto;border-radius:10px;}
+  .map-card img{display:block;width:100%;height:auto;border-radius:10px;}
+  .map-note{margin:12px 0 0;font-size:13px;color:var(--ink-soft);}
+  .map-note a{text-decoration:underline;}
 
   /* footer */
   footer{background:var(--navy-deep);color:var(--on-navy-soft);padding-block:40px;}
@@ -239,7 +241,7 @@
   <section id="inicio" class="hero">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow">San Martín · Provincia de Buenos Aires</span>
+        <span class="eyebrow">San Martín, Mendoza</span>
         <h1>Un oficio bien aprendido <span class="hl">no se lo lleva nadie.</span></h1>
         <p class="lead">Formación técnico-profesional pública y gratuita en electricidad, gas, soldadura, carpintería, informática, gastronomía y estética. Talleres reales, docentes en actividad y salida laboral desde el primer cuatrimestre.</p>
         <div class="hero-actions">
@@ -387,7 +389,7 @@
           <ul>
             <li>Ser mayor de 16 años.</li>
             <li>Estudios primarios completos (secundarios completos para Gasista).</li>
-            <li>DNI vigente y comprobante de domicilio en San Martín o partidos vecinos.</li>
+            <li>DNI vigente y comprobante de domicilio en San Martín o departamentos vecinos.</li>
           </ul>
         </div>
         <div>
@@ -447,28 +449,21 @@
         <ul class="contact-list">
           <li>
             <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-            <div><b>Sede San Martín</b><span>Av. Mitre 3450, San Martín, Provincia de Buenos Aires</span></div>
+            <div><b>Dirección</b><span>Ruta Nacional 7, Carril Costa Canal Montecaseros y Malvinas Argentinas, San Martín, Mendoza</span></div>
           </li>
           <li>
             <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L13 14l5 2v4a2 2 0 0 1-2 2C9 22 2 15 2 7a2 2 0 0 1 1-2z"/></svg>
-            <div><b>Secretaría</b><span>(011) 4752-0198 · lunes a viernes de 8 a 20 hs</span></div>
+            <div><b>Teléfono</b><span>2634-210261</span></div>
           </li>
           <li>
             <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 6 8 7 8-7"/></svg>
-            <div><b>Inscripciones</b><span>inscripciones@esomanuelbelgrano.edu.ar</span></div>
+            <div><b>Correo</b><span>escuelasuperiordeoficios@gmail.com</span></div>
           </li>
         </ul>
       </div>
       <div class="map-card">
-        <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Croquis de ubicación de la escuela sobre Av. Mitre">
-          <rect x="0" y="0" width="400" height="260" fill="var(--surface-2)" rx="4"/>
-          <rect x="0" y="120" width="400" height="20" fill="var(--surface)"/>
-          <rect x="180" y="0" width="20" height="260" fill="var(--surface)"/>
-          <rect x="150" y="95" width="90" height="70" fill="#fff" stroke="var(--navy)" stroke-width="2"/>
-          <circle cx="195" cy="130" r="6" fill="var(--coral)"/>
-          <text x="20" y="115" font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--ink-soft)">Av. Mitre</text>
-          <text x="205" y="20" font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--ink-soft)">Calle San Lorenzo</text>
-        </svg>
+        <a href="https://maps.app.goo.gl/pQHhha6Wo8KsavF47"><img src="canvas-design/assets/mapa-osm-escuela.png" alt="Mapa con la ubicación de la escuela sobre la Ruta Nacional 7, en San Martín, Mendoza"></a>
+        <p class="map-note"><a href="https://maps.app.goo.gl/pQHhha6Wo8KsavF47">Abrir en Google Maps.</a> Mapa © <a href="https://www.openstreetmap.org/copyright">colaboradores de OpenStreetMap</a>.</p>
       </div>
     </div>
   </section>
@@ -476,7 +471,7 @@
 
 <footer>
   <div class="wrap footer-inner">
-    <p>© 2026 Escuela Superior de Oficios Manuel Belgrano · San Martín, Buenos Aires</p>
+    <p>© 2026 Escuela Superior de Oficios Manuel Belgrano · San Martín, Mendoza</p>
     <div class="footer-links">
       <a href="#institucion">Institución</a>
       <a href="#oferta">Oferta educativa</a>
