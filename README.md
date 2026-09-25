@@ -37,6 +37,10 @@ Antes de publicar de forma oficial hay que conectar los datos reales:
 
 Para ver cómo se ve la página cuando no queda ningún cupo, abrir `index.html?sincupos=1` (solo en modo demo).
 
+## Fotos de los cursos
+
+Cada tarjeta tiene un espacio de imagen 16:10 en la parte superior. Mientras no haya foto muestra las iniciales del curso. Para agregar una, se guarda como JPG en `assets/oficios/` con el nombre del curso (la lista completa está en `assets/oficios/LEEME.md`); la página la detecta sola, sin tocar código.
+
 ## Ficha de cada curso
 
 Cada tarjeta tiene "Ver detalle", que abre una ficha inspirada en las carreras de UPrO: datos clave (quién lo dicta, tipo, área, duración, modalidad, costo, cupos), cursos relacionados del área y una consulta directa por WhatsApp. Cada ficha tiene enlace propio, por ejemplo `index.html#oficio/electricidad-domiciliaria`, para compartir en redes.

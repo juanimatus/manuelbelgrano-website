@@ -100,12 +100,14 @@
   }
 
   function cardHTML(c) {
-    return '<article style="display: flex; flex-direction: column; background: #FFFFFF; border: 2px solid var(--navy); border-radius: 4px;">' +
-      '<div style="display: flex; align-items: center; gap: 12px; padding: 20px 20px 0;">' +
-      '<div aria-hidden="true" style="flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: var(--navy); color: var(--accent); font-family: \'Montserrat\', sans-serif; font-weight: 900; font-size: 19px; border-radius: 4px;">' + esc(c.code) + '</div>' +
-      '<span style="font-size: 13px; font-weight: 700; background: #E3F2FB; padding: 4px 10px; border-radius: 999px;">' + esc(c.kind) + '</span>' +
+    var img = c.item.imagen || ('assets/oficios/' + c.slug + '.jpg');
+    return '<article style="display: flex; flex-direction: column; background: #FFFFFF; border: 2px solid var(--navy); border-radius: 4px; overflow: hidden;">' +
+      '<div class="card-media pegboard">' +
+      '<span class="card-code" aria-hidden="true">' + esc(c.code) + '</span>' +
+      '<img class="card-img" src="' + esc(img) + '" alt="" loading="lazy" decoding="async">' +
+      '<span class="card-kind">' + esc(c.kind) + '</span>' +
       '</div>' +
-      '<div style="display: flex; flex-direction: column; gap: 8px; padding: 16px 20px 22px; flex-grow: 1;">' +
+      '<div style="display: flex; flex-direction: column; gap: 8px; padding: 20px 22px 24px; flex-grow: 1;">' +
       '<h3 style="font-size: 19px; line-height: 1.15; letter-spacing: -0.025em;"><a href="#oficio/' + c.slug + '">' + esc(c.title) + '</a></h3>' +
       '<span style="font-size: 14px; font-weight: 700; color: var(--accent-dark);">' + esc(c.areaName) + '</span>' +
       '<div style="font-size: 13.5px; line-height: 1.4; color: #5B6B7B;"><span style="font-weight: 700; color: #4A5A6A;">Dicta:</span> <span>' + esc(c.inst) + '</span></div>' +
@@ -247,6 +249,9 @@
     var a = e.target.closest('[data-elegir]');
     if (a) elegir(a.getAttribute('data-elegir'));
   });
+  elCards.addEventListener('error', function (e) {
+    if (e.target && e.target.classList && e.target.classList.contains('card-img')) e.target.remove();
+  }, true);
   elMoreBtn.addEventListener('click', function () { state.showAll = !state.showAll; renderCatalog(); });
   $('limpiar-filtros').addEventListener('click', function () {
     state.area = 'Todos';
